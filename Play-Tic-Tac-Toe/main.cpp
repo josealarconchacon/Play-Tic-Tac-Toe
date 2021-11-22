@@ -22,8 +22,8 @@ int main() {
         TTTHumanHuman* tictactoe = new TTTHumanHuman();
         tictactoe->StartGame();
     }else if(choice == 2) {
-//        TTTHumanMatchine* tictactoe_matchine = new TTTHumanMatchine();
-//        tictactoe_matchine->GetPlayerName();
+        TTTHumanMatchine* tictactoe_matchine = new TTTHumanMatchine();
+        tictactoe_matchine->Matchine_vs_Player();
         cout<<"Human vs Matchine\n";
     } else if(choice == 3) {
         cout<<"Matchine vs Matchine\n";

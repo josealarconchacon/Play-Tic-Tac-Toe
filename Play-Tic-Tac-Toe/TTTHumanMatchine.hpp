@@ -10,22 +10,26 @@
 
 #include <stdio.h>
 
-class player {
-    std::string name;
-    int numWins;
-};
 
 class TTTHumanMatchine {
 private:
-    char BOARD[9];
-    const char BLANK = '_';
-    player Players[2];
+    char BOARD[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',};
+    char SPACE = ' ';
+    char MatchineChart = 'O';
+    char XTurn = 'X';
+    char Draw = 'D';
+//    const char BLANK = '_';
+//    player Players[2];
     
 public:
-    void Clear();
-    void WelcomeMessage();
-    void GetPlayerName();
     void DisplayBoard();
+    void PlayerXChoice();
+    void PlayerOChoice();
+    void MatchineChoice();
+    int BoardCounter(char countSymble);
+    char IsWinner();
+    void Matchine_vs_Player();
+    void Player_vs_Player();
 };
 
 #endif /* TTTHumanMatchine_hpp */
