@@ -18,8 +18,6 @@ private:
     char MatchineChart = 'O';
     char XTurn = 'X';
     char Draw = 'D';
-//    const char BLANK = '_';
-//    player Players[2];
     
 public:
     void DisplayBoard();
