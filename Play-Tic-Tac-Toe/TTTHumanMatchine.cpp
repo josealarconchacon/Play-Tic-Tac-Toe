@@ -90,10 +90,10 @@ char TTTHumanMatchine::IsWinner() {
         return BOARD[2];
     }
     
-    if(BoardCounter('X') + BoardCounter('O') < 9) {
-        return 'C'; // Countinue
+    if(BoardCounter(XTurn) + BoardCounter(MatchineChart) < 9) {
+        return Continue; // Countinue
     } else {
-        return 'D'; // Daow
+        return Draw; // Daow
     }
 }
 
@@ -123,7 +123,7 @@ void TTTHumanMatchine::Matchine_vs_Player() {
             break;
         }
         if(winner == Draw) {
-            std::cout<<" Draw\n";
+            std::cout<<" Game Draw\n";
             break;
         }
     }

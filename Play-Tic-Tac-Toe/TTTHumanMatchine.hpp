@@ -18,6 +18,7 @@ private:
     char MatchineChart = 'O';
     char XTurn = 'X';
     char Draw = 'D';
+    char Continue = 'C';
     
 public:
     void DisplayBoard();
