@@ -30,18 +30,6 @@ int main() {
     }else {
         cout<<"Bye\n";
     }
-  
-    
-//    TTTHumanMatchine* tictactoe_matchine = new TTTHumanMatchine();
-//    tictactoe_matchine->Matchine_vs_Player();
-    
-//    WelcomeToTheGame* msg = new WelcomeToTheGame();
-//    msg->IntroToGame();
-    
-
-//    TTTHumanHuman* tictactoe = new TTTHumanHuman();
-//    tictactoe->StartGame();
-    
     
     return 0;
 }
