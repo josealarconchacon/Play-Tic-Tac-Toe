@@ -15,7 +15,7 @@ class TTTHumanMatchine {
 private:
     char BOARD[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',};
     char SPACE = ' ';
-    char MatchineChart = 'O';
+    char OTurn = 'O';
     char XTurn = 'X';
     char Draw = 'D';
     char Continue = 'C';
@@ -23,12 +23,10 @@ private:
 public:
     void DisplayBoard();
     void PlayerXChoice();
-    void PlayerOChoice();
     void MatchineChoice();
     int BoardCounter(char countSymble);
     char IsWinner();
     void Matchine_vs_Player();
-    void Player_vs_Player();
 };
 
 #endif /* TTTHumanMatchine_hpp */

@@ -10,47 +10,61 @@
 #include "random"
 #include "TTTHumanMatchine.hpp"
 
-void TTTHumanMatchine::DisplayBoard() {
-    std::cout<<"  "<<"   |  "<<"   |  \n";
-    std::cout<<"  "<<BOARD[0]<<"  |  "<<BOARD[1]<<"  |  "<<BOARD[2]<<"\n";
-    std::cout<<"------------------\n";
-    std::cout<<"  "<<"   |  "<<"   |  \n";
-    std::cout<<"  "<<BOARD[3]<<"  |  "<<BOARD[4]<<"  |  "<<BOARD[5]<<"\n";
-    std::cout<<"------------------\n";
-    std::cout<<"  "<<"   |  "<<"   |  \n";
-    std::cout<<"  "<<BOARD[6]<<"  |  "<<BOARD[7]<<"  |  "<<BOARD[8]<<"\n";
-    std::cout<<"\n\n";
-}
-
-void TTTHumanMatchine::PlayerXChoice() {
+void TTTHumanMatchine::Matchine_vs_Player() {
+    std::string playerName;
+    std::cout<<"\n";
+    std::cout<<"  \t\tEnter your name: ";
+    std::cin>>playerName;
     while (true) {
-        std::cout<<"Select position: ";
-        int userChoice;
-        std::cin>>userChoice;
-        userChoice -= 1;;
-        if(userChoice < 0 || userChoice > 8) {
-            std::cout<<"Select a correct position\n";
-        } else if(BOARD[userChoice] != SPACE) {
-            std::cout<<"Select an ampty position\n";
+        DisplayBoard();
+        if(BoardCounter(XTurn) == BoardCounter(OTurn)) {
+            std::cout<<playerName<<" is your turn."<<std::endl;
+            PlayerXChoice();
         } else {
-            BOARD[userChoice] = XTurn;
+            MatchineChoice();
+        }
+        char winner = IsWinner();
+        if(winner == XTurn) {
+            DisplayBoard();
+            std::cout<<playerName<<" won the game"<<std::endl;
+            break;
+        } else if(winner == OTurn) {
+            std::cout<<"Computer won the game"<<std::endl;
+            break;
+        } else if(winner == Draw) {
+            std::cout<<"Game Draw"<<std::endl;
             break;
         }
     }
 }
 
 void TTTHumanMatchine::MatchineChoice() {
-    // generate random number to choose from (1 - 9)
     srand(time(0));
-    int makeChoice;
-    do{
-        makeChoice = rand() % 10;
-    } while(BOARD[makeChoice] != SPACE);
-    BOARD[makeChoice] = MatchineChart;
+    int choice;
+    do {
+        choice = rand() % 10;
+    } while(BOARD[choice] != ' ');
+    BOARD[choice] = OTurn;
 }
 
+void TTTHumanMatchine::PlayerXChoice() {
+    while (true) {
+        int choice;
+        std::cout<<"Select from 1 - 9: ";
+        std::cin>>choice;
+        choice--;
+        if(choice < 0 || choice > 8) {
+            std::cout<<"Select a correct posistion from 1 - 9: "<<std::endl;
+        } else if(BOARD[choice] != SPACE) {
+            std::cout<<"Select an empty positiin: ";
+            break;
+        } else {
+            BOARD[choice] = XTurn;
+            break;
+        }
+    }
+}
 
-// count how many time a symble appear in the board
 int TTTHumanMatchine::BoardCounter(char countSymble) {
     int total = 0;
     for(int i = 0; i < 9; i++) {
@@ -58,74 +72,52 @@ int TTTHumanMatchine::BoardCounter(char countSymble) {
             total += 1;
         }
     }
-    return total;
+    return  total;
 }
 
 char TTTHumanMatchine::IsWinner() {
-    // horizontal line
-    if(BOARD[0] == BOARD[1] && BOARD[1] == BOARD[2] && BOARD[0] != SPACE) {
+    //    hotizontal
+    if(BOARD[0] == BOARD[1] && BOARD[1] == BOARD[2] && BOARD[0] != ' ') {
         return BOARD[0];
     }
-    if(BOARD[3] == BOARD[4] && BOARD[4] == BOARD[5] && BOARD[3] != SPACE) {
+    if(BOARD[3] == BOARD[4] && BOARD[4] == BOARD[5] && BOARD[3] != ' ') {
         return BOARD[3];
     }
-    if(BOARD[6] == BOARD[7] && BOARD[7] == BOARD[8] && BOARD[4] != SPACE) {
+    if(BOARD[6] == BOARD[7] && BOARD[7] == BOARD[8] && BOARD[6] != ' ') {
         return BOARD[6];
     }
-    // vertical line
-    if(BOARD[0] == BOARD[3] && BOARD[3] == BOARD[6] && BOARD[0] != SPACE) {
+    // vertical
+    if(BOARD[0] == BOARD[3] && BOARD[3] == BOARD[6] && BOARD[0] != ' ') {
         return BOARD[0];
     }
-    if(BOARD[1] == BOARD[4] && BOARD[4] == BOARD[7] && BOARD[1] != SPACE) {
+    if(BOARD[1] == BOARD[4] && BOARD[4] == BOARD[7] && BOARD[1] != ' ') {
         return BOARD[1];
     }
-    if(BOARD[2] == BOARD[5] && BOARD[5] == BOARD[8] && BOARD[2] != SPACE) {
+    if(BOARD[2] == BOARD[5] && BOARD[5] == BOARD[8] && BOARD[2] != ' ') {
         return BOARD[2];
     }
-    // deagonal line
-    if(BOARD[0] == BOARD[4] && BOARD[4] == BOARD[8] && BOARD[0] != SPACE) {
+    // deagonal
+    if(BOARD[0] == BOARD[4] && BOARD[4] == BOARD[8] && BOARD[0] != ' ') {
         return BOARD[0];
     }
-    if(BOARD[2] == BOARD[4] && BOARD[4] == BOARD[6] && BOARD[2] != SPACE) {
+    if(BOARD[2] == BOARD[4] && BOARD[4] == BOARD[6] && BOARD[2] != ' ') {
         return BOARD[2];
     }
-    
-    if(BoardCounter(XTurn) + BoardCounter(MatchineChart) < 9) {
-        return Continue; // Countinue
+    if(BoardCounter(XTurn) + BoardCounter(OTurn) < 9) {
+        return Continue;
     } else {
-        return Draw; // Daow
+        return Draw;
     }
 }
 
-
-void TTTHumanMatchine::Matchine_vs_Player() {
-    std::string playerName;
-    std::cout<<"Enter player name: ";
-    std::cin>>playerName;
-    while (true) {
-        DisplayBoard();
-        if(BoardCounter(XTurn) == BoardCounter(MatchineChart)) {
-            std::cout<<playerName<<" turn\n";
-            PlayerXChoice();
-        } else {
-            MatchineChoice();
-        }
-        char winner = IsWinner();
-        
-        if(winner == XTurn) {
-            DisplayBoard();
-            std::cout<<playerName<<" Won the game\n";
-            break;
-        }
-        if(winner == MatchineChart) {
-            DisplayBoard();
-            std::cout<<MatchineChart<<" Won the game\n";
-            break;
-        }
-        if(winner == Draw) {
-            std::cout<<" Game Draw\n";
-            break;
-        }
-    }
+void TTTHumanMatchine::DisplayBoard() {
+    std::cout << "     |     |     " << std::endl;
+    std::cout << "  " << BOARD[0] << "  |  " << BOARD[1] << "  |  " << BOARD[2] << std::endl;
+    std::cout << "_____|_____|_____" << std::endl;
+    std::cout << "     |     |     " << std::endl;
+    std::cout << "  " << BOARD[3] << "  |  " << BOARD[4] << "  |  " << BOARD[5] << std::endl;
+    std::cout << "_____|_____|_____" << std::endl;
+    std::cout << "     |     |     " << std::endl;
+    std::cout << "  " << BOARD[6] << "  |  " << BOARD[7] << "  |  " << BOARD[8] << std::endl;
+    std::cout << "     |     |     " << std::endl << std::endl;
 }
-
