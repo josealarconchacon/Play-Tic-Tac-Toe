@@ -10,10 +10,10 @@
 
 #include <stdio.h>
 
+// Implement game menu class
 class WelcomeToTheGame {
-    
 public:
-    void IntroToGame();
+    void IntroToGame() const;
 };
 
 #endif /* WelcomeToTheGame_hpp */

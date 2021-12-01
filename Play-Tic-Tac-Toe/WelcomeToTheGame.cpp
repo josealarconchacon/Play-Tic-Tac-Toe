@@ -8,7 +8,8 @@
 #include <iostream>
 #include "WelcomeToTheGame.hpp"
 
-void WelcomeToTheGame::IntroToGame() {
+// Display game menu
+void WelcomeToTheGame::IntroToGame() const {
     std::cout<<"\n";
     std::cout<<"\t\t\tWelcome to Tic Tac Toe Game\n\n";
     std::cout<<"\t\tSelect your options to start the game:\n\n";
