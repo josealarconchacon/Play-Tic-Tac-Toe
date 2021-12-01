@@ -30,7 +30,7 @@ void TTTHumanMatchine::Matchine_vs_Player() {
             std::cout<<playerName<<" won the game"<<std::endl;
             break;
         } else if(winner == OTurn) {
-            std::cout<<"Computer won the game"<<std::endl;
+            std::cout<<"Computer won the game "<<std::endl;
             break;
         } else if(winner == Draw) {
             std::cout<<"Game Draw"<<std::endl;
@@ -40,7 +40,7 @@ void TTTHumanMatchine::Matchine_vs_Player() {
 }
 
 void TTTHumanMatchine::MatchineChoice() {
-    srand(time(0));
+    srand( static_cast<unsigned int>(time(0)));
     int choice;
     do {
         choice = rand() % 10;
@@ -51,7 +51,7 @@ void TTTHumanMatchine::MatchineChoice() {
 void TTTHumanMatchine::PlayerXChoice() {
     while (true) {
         int choice;
-        std::cout<<"Select from 1 - 9: ";
+        std::cout<<"Choose your play from (1 - 9): ";
         std::cin>>choice;
         choice--;
         if(choice < 0 || choice > 8) {
@@ -66,18 +66,19 @@ void TTTHumanMatchine::PlayerXChoice() {
     }
 }
 
-int TTTHumanMatchine::BoardCounter(char countSymble) {
+int TTTHumanMatchine::BoardCounter(char count) {
     int total = 0;
     for(int i = 0; i < 9; i++) {
-        if(BOARD[i] == countSymble) {
+        if(BOARD[i] == count) {
             total += 1;
         }
     }
     return  total;
 }
 
+//check all possible winner
 char TTTHumanMatchine::IsWinner() {
-    //    hotizontal
+//    horizontal line
     if(BOARD[0] == BOARD[1] && BOARD[1] == BOARD[2] && BOARD[0] != ' ') {
         return BOARD[0];
     }
@@ -87,7 +88,7 @@ char TTTHumanMatchine::IsWinner() {
     if(BOARD[6] == BOARD[7] && BOARD[7] == BOARD[8] && BOARD[6] != ' ') {
         return BOARD[6];
     }
-    // vertical
+//    vertical line
     if(BOARD[0] == BOARD[3] && BOARD[3] == BOARD[6] && BOARD[0] != ' ') {
         return BOARD[0];
     }
@@ -97,7 +98,7 @@ char TTTHumanMatchine::IsWinner() {
     if(BOARD[2] == BOARD[5] && BOARD[5] == BOARD[8] && BOARD[2] != ' ') {
         return BOARD[2];
     }
-    // deagonal
+//    diagonal line
     if(BOARD[0] == BOARD[4] && BOARD[4] == BOARD[8] && BOARD[0] != ' ') {
         return BOARD[0];
     }
@@ -111,7 +112,8 @@ char TTTHumanMatchine::IsWinner() {
     }
 }
 
-void TTTHumanMatchine::DisplayBoard() {
+// Display Board
+void TTTHumanMatchine::DisplayBoard()const {
     std::cout << "     |     |     " << std::endl;
     std::cout << "  " << BOARD[0] << "  |  " << BOARD[1] << "  |  " << BOARD[2] << std::endl;
     std::cout << "_____|_____|_____" << std::endl;

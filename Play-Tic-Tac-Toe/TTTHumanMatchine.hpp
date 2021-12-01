@@ -21,10 +21,10 @@ private:
     char Continue = 'C';
     
 public:
-    void DisplayBoard();
+    void DisplayBoard() const;
     void PlayerXChoice();
     void MatchineChoice();
-    int BoardCounter(char countSymble);
+    int BoardCounter(char count);
     char IsWinner();
     void Matchine_vs_Player();
 };
