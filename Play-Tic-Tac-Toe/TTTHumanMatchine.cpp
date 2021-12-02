@@ -105,11 +105,7 @@ char TTTHumanMatchine::IsWinner() {
     if(BOARD[2] == BOARD[4] && BOARD[4] == BOARD[6] && BOARD[2] != ' ') {
         return BOARD[2];
     }
-    if(BoardCounter(XTurn) + BoardCounter(OTurn) < 9) {
-        return Continue;
-    } else {
-        return Draw;
-    }
+    return BoardCounter(XTurn) + BoardCounter(OTurn) < 9 ? Continue : Draw;
 }
 
 // Display Board
